@@ -17,14 +17,16 @@ repositories {   // repositories for Jar's you access in your code
   mavenCentral()
 }
 
-apply plugin: 'java'                              // standard Java tasks
+apply plugin: 'scala'                              // standard Java tasks
 apply plugin: 'war'                               // standard Web Archive plugin
 apply plugin: 'com.google.cloud.tools.appengine'  // App Engine tasks
 
 dependencies {
   providedCompile group: 'javax.servlet', name: 'servlet-api', version:'2.5'
   compile 'com.google.appengine:appengine:+'
-// Add your dependencies here.
+  compile 'org.scala-lang:scala-library:2.11.8'
+
+  testCompile 'org.scalatest:scalatest_2.11:3.0.0'
 
 }
 
