@@ -1,10 +1,10 @@
 <web-app xmlns="http://java.sun.com/xml/ns/javaee" version="2.5">
-    <servlet>
-        <servlet-name>HelloWorld</servlet-name>
-        <servlet-class>dugger.demo.servlet.HelloWorldServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>HelloWorld</servlet-name>
+    <filter>
+        <filter-name>HelloWorld</filter-name>
+        <filter-class>dugger.demo.scalatra.HelloWorldFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>HelloWorld</filter-name>
         <url-pattern>/*</url-pattern>
-    </servlet-mapping>
+    </filter-mapping>
 </web-app>
