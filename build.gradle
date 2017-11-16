@@ -1,7 +1,7 @@
 ext.appEngineVer = '1.9.59'
 ext.javaxServletVer = '3.1.0'
 ext.scalatestVer = '2.11:3.0.0'
-ext.scalatraVer = '2.10:2.3.1'
+ext.scalatraVer = '2.11:2.3.1'
 ext.scalaVer = '2.10.2'
 
 buildscript {
@@ -12,7 +12,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath "com.google.cloud.tools:appengine-gradle-plugin:$appEngineGradleVer"
+        classpath "com.google.cloud.tools:appengine-gradle-plugin:+"
         classpath "org.akhikhl.gretty:gretty:$grettyVer"
     }
 }
@@ -25,16 +25,17 @@ repositories {
   jcenter()
 }
 
+apply plugin: 'java'
 apply plugin: 'scala'
 apply plugin: 'war'
 apply plugin: 'com.google.cloud.tools.appengine'
 apply plugin: 'org.akhikhl.gretty'
 
 dependencies {
-    compile "javax.servlet:javax.servlet-api:$javaxServletVer"
-    compile "com.google.appengine:appengine:$appEngineVer"
+    compile("org.scalatra:scalatra_$scalatraVer")
     compile "org.scala-lang:scala-library:$scalaVer"
-    compile "org.scalatra:scalatra_$scalatraVer"
+    providedCompile("javax.servlet:javax.servlet-api:$javaxServletVer")
+    providedCompile("com.google.appengine:appengine:+")
 
     testCompile "org.scalatest:scalatest_$scalatestVer"
 
@@ -49,5 +50,9 @@ gretty {
 group = 'dugger.demo.appengine'   // Generated output GroupId
 version = '0.1'          // Version in generated output
 
+
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
+tasks.withType(ScalaCompile) {
+    targetCompatibility = "1.7"
+}
