@@ -12,15 +12,14 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath "com.google.cloud.tools:appengine-gradle-plugin:+"
+        classpath "com.google.cloud.tools:appengine-gradle-plugin:$appEngineGradleVer"
         classpath "org.akhikhl.gretty:gretty:$grettyVer"
     }
 }
 
 repositories {
     maven {
-        url 'https://maven-central.storage.googleapis.com'             // Google's mirror of Maven Central
-//      url 'https://oss.sonatype.org/content/repositories/snapshots' // SNAPSHOT Repository (if needed)
+        url 'https://maven-central.storage.googleapis.com'
   }
   jcenter()
 }
@@ -33,12 +32,23 @@ apply plugin: 'org.akhikhl.gretty'
 
 dependencies {
     compile("org.scalatra:scalatra_$scalatraVer")
+    compile("org.scalatra:scalatra-scalate_$scalatraVer")
     compile "org.scala-lang:scala-library:$scalaVer"
-    providedCompile("javax.servlet:javax.servlet-api:$javaxServletVer")
-    providedCompile("com.google.appengine:appengine:+")
+    providedCompile("javax.servlet:javax.servlet-api:$javaxServletVer") { transitive = false }
+    providedCompile("com.google.appengine:appengine:$appEngineVer")
 
     testCompile "org.scalatest:scalatest_$scalatestVer"
 
+}
+
+appengine {
+    deploy {
+        project = 'duggerapps'
+        deployables = 'src/main/appengine/app.yaml'
+        imageUrl = 'gcr.io/google-appengine/jetty'
+        promote = false
+        stopPreviousVersion = false
+    }
 }
 
 gretty {
@@ -47,12 +57,9 @@ gretty {
   servletContainer = 'jetty9'  // What App Engine Flexible uses
 }
 
-group = 'dugger.demo.appengine'   // Generated output GroupId
-version = '0.1'          // Version in generated output
+group = 'dugger.demo.appengine'
+version = '0.1'
 
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
-tasks.withType(ScalaCompile) {
-    targetCompatibility = "1.7"
-}
