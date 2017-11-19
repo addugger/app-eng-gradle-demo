@@ -1,4 +1,4 @@
-package dugger.demo.scalatra
+package dugger.demo.servlet
 
 import org.scalatra.ScalatraServlet
 

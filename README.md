@@ -2,8 +2,4 @@ Unfortunately, at this point I have still been unsuccessful getting the app with
 
 Something that's good to note is that for a while, I was getting very odd behavior from the GUI deployed version. Sometimes it would respond correctly, but mostly I would get 502 Bad Gateway errors...and seemingly eventually it would get to a state where it only had 502 responses. I think I finally got this fixed up by remembering to finally add the ScalaBootstrap file instead of trying to use annotations, and also adding the ScalatraListener stuff to the web.xml file.
 
-Things to consider removing and see if the deployment still works:
-* appengine-web.xml (i'm up in the air on whether i think this file is necessary. there's not really anything in it right now, so probably not)
-* index.html (almost certain this can go away)
-
 Looks like there's known issue where the Java runtime consumes too much overhead, so the default machine resources are too small, and things get bogged down and the 502 issue can occur. Again...this wasn't something I found in the docs, but instead on Stack Overflow. After specifying some extra resources in app.yaml, the app was definitely much peppier and I haven't gotten any 502's. Whoop whoop!
