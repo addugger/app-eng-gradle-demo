@@ -17,7 +17,7 @@ class TodoServlet(todos : collection.mutable.Map[Integer, Todo]) extends Scalatr
   }
 
   get("/:id/completed") {
-    val todo = todos.get(params("id").toInt).get
+    val todo = todos(params("id").toInt)
     todo.completed = true
     redirect("/")
   }
