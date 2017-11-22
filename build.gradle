@@ -44,8 +44,6 @@ dependencies {
 appengine {
     deploy {
         project = 'duggerapps'
-        deployables = 'src/main/appengine/app.yaml'
-        imageUrl = 'gcr.io/google-appengine/jetty'
         promote = false
         stopPreviousVersion = false
     }
@@ -58,7 +56,6 @@ gretty {
 }
 
 group = 'dugger.demo.appengine'
-version = '0.1'
 
 
 sourceCompatibility = 1.8
