@@ -1,13 +1,16 @@
 import javax.servlet.ServletContext
 
-import dugger.demo.model.Todo
+import com.googlecode.objectify.ObjectifyService
+import dugger.demo.model.{Todo, User}
 import dugger.demo.servlet.{HelloWorldServlet, TodoServlet}
 import org.scalatra.LifeCycle
 
 class ScalatraBootstrap extends LifeCycle {
   override def init(context: ServletContext) {
+    ObjectifyService.register(classOf[Todo])
+    ObjectifyService.register(classOf[User])
+
     context.mount(new HelloWorldServlet, "/hello")
-    val todos = collection.mutable.Map[Integer, Todo]()
-    context.mount(new TodoServlet(todos), "/*")
+    context.mount(new TodoServlet, "/*")
   }
 }

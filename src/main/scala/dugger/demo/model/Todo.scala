@@ -1,20 +1,28 @@
 package dugger.demo.model
 
-import com.google.cloud.datastore.{Entity, Key, KeyFactory}
-import com.googlecode.objectify.annotation
-import dugger.demo.utils.DatastoreUtils
+import com.googlecode.objectify.{Key, Result}
+import com.googlecode.objectify.annotation._
+import com.googlecode.objectify.ObjectifyService.ofy
 
-@annotation.Entity
-case class Todo(id : Long, body : String, var completed : Boolean) extends DatastoreModel {
-  override def Kind = "todo"
+import scala.collection.JavaConverters._
 
-  override lazy val keyFactory: KeyFactory = DatastoreUtils.datastore.newKeyFactory().setKind(Kind)
+import java.lang.{ Long => JLong }
 
-  override def toEntity(key: Key): Entity = {
-    Entity.newBuilder(key)
-      .set("id", id)
-      .set("body", body)
-      .set("completed", completed)
-      .build()
+
+@Entity
+class Todo(var body : String,
+           @Index var completed : Boolean = false) {
+  @Id var id: JLong = null
+  // Only for Objectify creation
+  private def this() { this(null, false) }
+
+  def getId: JLong = { id }
+  def setId(id: JLong) = { this.id = id }
+}
+
+object Todo {
+  def getTodos(ancestorName: String): List[Todo] = {
+    val parentKey = Key.create(classOf[User], ancestorName)
+    ofy().load().`type`(classOf[Todo]).ancestor(parentKey).list.asScala.toList
   }
 }
