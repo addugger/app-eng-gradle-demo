@@ -1,7 +1,6 @@
 ext.appEngineVer = '1.9.24'
 ext.datastoreVer = '1.12.0'
 ext.javaxServletVer = '3.1.0'
-ext.objectifyVer = '5.1.21'
 ext.scalatestVer = '2.11:3.0.0'
 ext.scalatraVer = '2.11:2.3.1'
 ext.scalaVer = '2.10.2'
@@ -37,15 +36,10 @@ dependencies {
     compile("org.scalatra:scalatra-scalate_$scalatraVer")
     compile("org.scala-lang:scala-library:$scalaVer")
     compile("com.google.cloud:google-cloud-datastore:$datastoreVer")
-    compile("com.googlecode.objectify:objectify:$objectifyVer")
     providedCompile("javax.servlet:javax.servlet-api:$javaxServletVer") { transitive = false }
     providedCompile("com.google.appengine:appengine:$appEngineVer")
-    compile("com.google.appengine:appengine-api-1.0-sdk:$appEngineVer")
-    compile("com.google.appengine:appengine-api-labs:$appEngineVer")
 
     testCompile "org.scalatest:scalatest_$scalatestVer"
-    testCompile 'com.google.appengine:appengine-testing:1.9.34'
-    testCompile 'com.google.appengine:appengine-api-stubs:1.9.34'
 }
 
 appengine {

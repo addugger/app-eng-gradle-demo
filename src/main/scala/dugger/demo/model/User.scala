@@ -1,8 +1,18 @@
 package dugger.demo.model
 
-import com.googlecode.objectify.annotation.{Entity, Id}
+import com.google.cloud.datastore._
 
-@Entity
-class User() {
-  @Id var name: String = null
+case class User(var name: String) extends NameEntity {
+  val Kind: String = User.Kind
+
+  override def newEntity: FullEntity[IncompleteKey] = {
+    FullEntity.newBuilder(newKey)
+      .set("id", name)
+      .build()
+  }
 }
+
+object User {
+  val Kind = "user"
+}
+
