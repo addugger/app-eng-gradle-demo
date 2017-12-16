@@ -35,7 +35,9 @@ dependencies {
     compile("org.scalatra:scalatra_$scalatraVer")
     compile("org.scalatra:scalatra-scalate_$scalatraVer")
     compile("org.scala-lang:scala-library:$scalaVer")
-    compile("com.google.cloud:google-cloud-datastore:$datastoreVer")
+    compile("com.google.cloud:google-cloud-datastore:$datastoreVer") {
+        exclude(group: "com.google.protobuf", module: "protobuf-lite")
+    }
     providedCompile("javax.servlet:javax.servlet-api:$javaxServletVer") { transitive = false }
     providedCompile("com.google.appengine:appengine:$appEngineVer")
 
