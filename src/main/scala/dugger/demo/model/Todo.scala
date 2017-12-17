@@ -18,7 +18,7 @@ case class Todo(id: Long = 0,
     FullEntity.newBuilder(keyFactory.newKey())
       .set("body", body)
       .set("completed", completed)
-      .build()
+
   }
 
   def complete(): Unit = { updateBoolean("completed", value = true) }
