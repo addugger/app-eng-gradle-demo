@@ -1,9 +1,11 @@
 ext.appEngineVer = '1.9.24'
 ext.datastoreVer = '1.12.0'
 ext.javaxServletVer = '3.1.0'
+ext.junitVer = '4.12'
 ext.scalatestVer = '2.11:3.0.0'
 ext.scalatraVer = '2.11:2.3.1'
 ext.scalaVer = '2.10.2'
+ext.toolsVer = '1.9.59'
 
 buildscript {
     ext.appEngineGradleVer = '1.3.4'
@@ -41,9 +43,11 @@ dependencies {
     providedCompile("javax.servlet:javax.servlet-api:$javaxServletVer") { transitive = false }
     providedCompile("com.google.appengine:appengine:$appEngineVer")
 
+    testCompile("com.google.appengine:appengine-testing:$appEngineVer")
     testCompile("com.google.appengine:appengine-api-labs:$appEngineVer")
     testCompile("com.google.appengine:appengine-api-stubs:$appEngineVer")
     testCompile "org.scalatest:scalatest_$scalatestVer"
+    testCompile("junit:junit:$junitVer")
 }
 
 appengine {

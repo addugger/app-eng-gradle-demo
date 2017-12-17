@@ -6,7 +6,8 @@ trait EntityModel {
   val Kind: String
 
   lazy val keyFactory: KeyFactory = datastore.newKeyFactory().setKind(this.Kind)
-  lazy val datastore: Datastore = DatastoreOptions.getDefaultInstance.getService
+
+  val datastore: Datastore
 
   def newEntity: FullEntity[IncompleteKey]
 
